@@ -123,9 +123,12 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.menu_refresh:
+                onRestart();
+                Toast.makeText(this, "On refresh now!", Toast.LENGTH_SHORT).show();
+                return true;
             case R.id.menu_home:
                 Toast.makeText(this, "Back to homepage!", Toast.LENGTH_SHORT).show();
-                onRestart();
                 return true;
             case R.id.menu_favorite:
                 Toast.makeText(this, "Opening Favorite session now!", Toast.LENGTH_SHORT).show();

@@ -7,37 +7,57 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ptsganjil202111rpl2akhtarrasyad19.Model.RealmModel;
+import com.example.ptsganjil202111rpl2akhtarrasyad19.Realm.RealmHelper;
 import com.squareup.picasso.Picasso;
 
-public class DetailRow extends AppCompatActivity {
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+
+public class DetailRow extends AppCompatActivity implements View.OnClickListener {
+    String title, desc, genre, image, release, actors, director, country, rating, imageLand;
+    ImageView imageView;
+    TextView textViewTitle, textViewInfo, textViewDesc;
+    ImageButton btnFavDetail;
+    ProgressBar progressBar;
+    Realm realm;
+    RealmHelper realmHelper;
+    RealmModel realmModel;
+    //    Boolean key = false;
+    Integer id;
+    Boolean key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_row);
-        ProgressBar progressBar = findViewById(R.id.progress_bar);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        String desc = intent.getStringExtra("desc");
-        String genre = intent.getStringExtra("genre");
-        String image = intent.getStringExtra("image");
-        String release = intent.getStringExtra("release");
-        String actors = intent.getStringExtra("actors");
-        String director = intent.getStringExtra("director");
-        String country = intent.getStringExtra("country");
-        String rating = intent.getStringExtra("rating");
-        String imageLand = intent.getStringExtra("imageLand");
+        title = intent.getStringExtra("title");
+        desc = intent.getStringExtra("desc");
+        genre = intent.getStringExtra("genre");
+        image = intent.getStringExtra("image");
+        release = intent.getStringExtra("release");
+        actors = intent.getStringExtra("actors");
+        director = intent.getStringExtra("director");
+        country = intent.getStringExtra("country");
+        rating = intent.getStringExtra("rating");
+        imageLand = intent.getStringExtra("imageLand");
 
-        ImageView imageView = findViewById(R.id.image_view_detail);
-        TextView textViewTitle = findViewById(R.id.text_title_detail);
-        TextView textViewInfo = findViewById(R.id.text_info_detail);
-        TextView textViewDesc = findViewById(R.id.text_desc_detail);
+        imageView = findViewById(R.id.image_view_detail);
+        textViewTitle = findViewById(R.id.text_title_detail);
+        textViewInfo = findViewById(R.id.text_info_detail);
+        textViewDesc = findViewById(R.id.text_desc_detail);
+        btnFavDetail = findViewById(R.id.btn_fav_detail);
+        progressBar = findViewById(R.id.progress_bar);
 
         if (imageLand.isEmpty()) {
             Glide.with(this)
@@ -66,9 +86,26 @@ public class DetailRow extends AppCompatActivity {
         textViewDesc.setText("Synopsis : " + desc);
 
         progressBar.setVisibility(View.GONE);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(title);
+
+//        Realm.init(DetailRow.this);
+//        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+//        realm = Realm.getInstance(configuration);
+        realm = Realm.getDefaultInstance();
+//        key = realmModel.getKey();
+//        if (key == true){
+//            btnFavDetail.setImageResource(R.drawable.ic_favorite);
+//        }
+        Number currentIdNum = realm.where(RealmModel.class).max("id");
+        if (currentIdNum == null) {
+            key = false;
+        } else {
+            key = true;
+        }
+
+
+        btnFavDetail.setOnClickListener(this);
     }
 
     @Override
@@ -79,5 +116,27 @@ public class DetailRow extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnFavDetail) {
+            realmHelper = new RealmHelper(realm);
+            if (key == false) {
+                realmModel = new RealmModel(title, desc, genre, image, release, actors, director, country, rating, imageLand);
+                realmModel.setKey(true);
+                realmHelper.save(realmModel);
+                btnFavDetail.setImageResource(R.drawable.ic_favorite);
+                Toast.makeText(this, "Succesfully add to favorite!", Toast.LENGTH_SHORT).show();
+                key = true;
+            } else {
+//                id = realmModel.getId();
+//                realmHelper.delete(id);
+                btnFavDetail.setImageResource(R.drawable.ic_favorite_shadow);
+                Toast.makeText(DetailRow.this, "Delete from favorite Success!", Toast.LENGTH_SHORT).show();
+                key = false;
+                finish();
+            }
+        }
     }
 }
