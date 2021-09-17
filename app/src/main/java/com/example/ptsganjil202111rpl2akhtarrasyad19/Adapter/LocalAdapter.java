@@ -110,6 +110,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
     //OnCreateContextMenuListener
     private View view;
     private int posisi;
+
     private final MenuItem.OnMenuItemClickListener onClickContextMenu = new MenuItem.OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {

@@ -145,7 +145,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
     protected void onRestart() {
         super.onRestart();
 
-        mLocalAdapter.notifyDataSetChanged();
         AddData();
+        mLocalAdapter.notifyDataSetChanged();
     }
 }

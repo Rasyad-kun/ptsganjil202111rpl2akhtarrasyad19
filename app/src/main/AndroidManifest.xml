@@ -5,12 +5,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".Realm.DefaultConfig"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ptsganjil202111rpl2akhtarrasyad19">
+        <activity android:name=".DetailRowFav"></activity>
+        <activity android:name=".FavoriteActivity" />
         <activity android:name=".DetailRow" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
