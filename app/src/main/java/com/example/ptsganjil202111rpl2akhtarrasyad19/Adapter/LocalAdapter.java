@@ -23,7 +23,7 @@ import com.example.ptsganjil202111rpl2akhtarrasyad19.R;
 
 import java.util.ArrayList;
 
-public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHolder>{
+public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHolder> {
     private Context mContext;
     private ArrayList<LocalModel> mLocalList;
 

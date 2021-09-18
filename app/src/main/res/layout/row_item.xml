@@ -18,7 +18,7 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="470dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,10 +30,10 @@
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp"/>
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/text_genre"

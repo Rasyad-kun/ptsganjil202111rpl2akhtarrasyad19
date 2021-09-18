@@ -106,7 +106,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
         recyclerView.setAdapter(localAdapter); //*
         localAdapter.setOnItemClickListener(HomeActivity.this); //Detail Activity / Callback / OnItemClickListener
 
-        if (localList.isEmpty()){
+        if (localList.isEmpty()) {
             tv_empty.setVisibility(View.VISIBLE);
         } else {
             tv_empty.setVisibility(View.INVISIBLE);
@@ -137,7 +137,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_refresh:
                 onRestart();
                 Toast.makeText(this, "On refresh now!", Toast.LENGTH_SHORT).show();

@@ -12,28 +12,28 @@ import io.realm.RealmResults;
 public class RealmHelper {
     Realm realm;
 
-    public  RealmHelper(Realm realm){
+    public RealmHelper(Realm realm) {
         this.realm = realm;
     }
 
     // untuk menyimpan data
-    public void save(final RealmModel realmModel){
+    public void save(final RealmModel realmModel) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                if (realm != null){
+                if (realm != null) {
                     Log.e("Created", "Database was created");
                     Number currentIdNum = realm.where(RealmModel.class).max("id");
                     int nextId;
-                    if (currentIdNum == null){
+                    if (currentIdNum == null) {
                         nextId = 1;
-                    }else {
+                    } else {
                         nextId = currentIdNum.intValue() + 1;
                     }
                     realmModel.setKey(true);
                     realmModel.setId(nextId);
                     RealmModel model = realm.copyToRealm(realmModel);
-                }else{
+                } else {
                     Log.e("ppppp", "execute: Database not Exist");
                 }
             }
@@ -41,13 +41,13 @@ public class RealmHelper {
     }
 
     // untuk memanggil semua data
-    public List<RealmModel> getAllRealm(){
+    public List<RealmModel> getAllRealm() {
         RealmResults<RealmModel> results = realm.where(RealmModel.class).findAll();
         return results;
     }
 
     // untuk menghapus data
-    public void delete(Integer id){
+    public void delete(Integer id) {
         final RealmResults<RealmModel> model = realm.where(RealmModel.class).equalTo("id", id).findAll();
         realm.executeTransaction(new Realm.Transaction() {
             @Override

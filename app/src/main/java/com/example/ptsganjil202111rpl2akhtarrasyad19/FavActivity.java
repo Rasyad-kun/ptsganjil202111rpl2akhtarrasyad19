@@ -68,11 +68,11 @@ public class FavActivity extends AppCompatActivity {
         show();
     }
 
-    public void show(){
+    public void show() {
         realmAdapter = new RealmAdapter(this, realmModelList);
         recyclerView.setAdapter(realmAdapter);
 
-        if (realmModelList.isEmpty()){
+        if (realmModelList.isEmpty()) {
             tv_empty.setVisibility(View.VISIBLE);
         } else {
             tv_empty.setVisibility(View.INVISIBLE);
@@ -84,7 +84,7 @@ public class FavActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_refresh:
                 onRestart();
                 Toast.makeText(this, "On refresh now!", Toast.LENGTH_SHORT).show();

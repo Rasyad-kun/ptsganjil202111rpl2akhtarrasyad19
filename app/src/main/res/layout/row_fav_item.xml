@@ -17,7 +17,7 @@
             android:id="@+id/image_view_fav_item"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,11 +29,11 @@
                 android:id="@+id/text_title_fav_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="Title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/text_genre_fav_item"
