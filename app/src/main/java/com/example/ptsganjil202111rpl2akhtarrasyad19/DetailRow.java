@@ -123,12 +123,12 @@ public class DetailRow extends AppCompatActivity implements View.OnClickListener
                 realmModel = new RealmModel(title, desc, genre, image, release, actors, director, country, rating, imageLand);
                 realmHelper.save(realmModel);
                 btnFavDetail.setImageResource(R.drawable.ic_favorite);
-                Toast.makeText(this, "Succesfully add to favorite!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Successfully added to favorites!", Toast.LENGTH_SHORT).show();
                 key = true;
             } else {
 //                id = realmModel.getId();
 //                realmHelper.delete(id);
-                Toast.makeText(this, "Was added to favorite!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Already added to favorites!", Toast.LENGTH_SHORT).show();
             }
         }
     }

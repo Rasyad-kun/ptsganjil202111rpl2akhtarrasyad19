@@ -56,7 +56,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
     public void onBindViewHolder(@NonNull LocalViewHolder holder, int position) {
         final LocalModel model = mLocalList.get(position);
         holder.mTextViewTitle.setText(model.getmTitle());
-        holder.mTextviewGenre.setText("Genre : " + model.getmGenre());
+        holder.mTextviewGenre.setText(model.getmGenre());
         Glide.with(mContext)
                 .load(model.getmImage())
                 .fitCenter()

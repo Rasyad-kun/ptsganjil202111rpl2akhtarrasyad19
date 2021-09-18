@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/text_genre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:text="genre"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </LinearLayout>

@@ -87,14 +87,15 @@ public class FavActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_refresh:
                 onRestart();
-                Toast.makeText(this, "On refresh now!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Refreshing now!", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_home:
                 startActivity(new Intent(FavActivity.this, HomeActivity.class));
                 Toast.makeText(this, "Back to homepage!", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
             case R.id.menu_favorite:
-                Toast.makeText(this, "In favorite now!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "On favorite list now!", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

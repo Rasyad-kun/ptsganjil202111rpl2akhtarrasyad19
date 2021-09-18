@@ -140,14 +140,14 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
         switch (item.getItemId()) {
             case R.id.menu_refresh:
                 onRestart();
-                Toast.makeText(this, "On refresh now!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Refreshing now!", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_home:
-                Toast.makeText(this, "In homepage now!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "On the homepage now!!", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_favorite:
                 startActivity(new Intent(HomeActivity.this, FavActivity.class));
-                Toast.makeText(this, "Opening favorite list now!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Moving to the favorite list now!", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

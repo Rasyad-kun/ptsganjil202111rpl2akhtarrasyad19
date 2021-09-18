@@ -48,7 +48,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHol
     public void onBindViewHolder(RealmAdapter.RealmViewHolder holder, int position) {
         final RealmModel model = mRealmModelsList.get(position);
         holder.mTextViewTitle.setText(model.getmTitle());
-        holder.mTextviewGenre.setText("Genre : " + model.getmGenre());
+        holder.mTextviewGenre.setText("Genre: " + model.getmGenre());
         Glide.with(mContext)
                 .load(model.getmImage())
                 .fitCenter()
@@ -101,9 +101,9 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHol
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            MenuItem Delete = menu.add(Menu.NONE, 1, 1, "Delete");
+            MenuItem Remove = menu.add(Menu.NONE, 1, 1, "Remove");
             posisi = getAdapterPosition();
-            Delete.setOnMenuItemClickListener(onClickContextMenu);
+            Remove.setOnMenuItemClickListener(onClickContextMenu);
         }
     }
 
@@ -121,12 +121,12 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHol
                 case 1:
                     //Delete data, konfirmasi dialog
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    builder.setMessage("want to remove this?")
+                    builder.setMessage("Want to remove this?")
                             .setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Toast.makeText(view.getContext(), mRealmModelsList.get(posisi).getmTitle() + "Remove from favorite Success", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(view.getContext(), mRealmModelsList.get(posisi).getmTitle() + " successfully removed from favorite list!", Toast.LENGTH_SHORT).show();
                                     realmHelper = new RealmHelper(realm);
                                     realmHelper.delete(mRealmModelsList.get(posisi).getId());
 //                                    mRealmModelsList.remove(posisi);

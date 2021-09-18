@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -37,20 +38,20 @@ public class DetailFavActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_detail_fav);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        imageView = findViewById(R.id.image_view_detail_fav);
+        textViewTitle = findViewById(R.id.text_title_detail_fav);
+        textViewInfo = findViewById(R.id.text_info_detail_fav);
+        textViewDesc = findViewById(R.id.text_desc_detail_fav);
+        btnFavDetail = findViewById(R.id.btn_fav_detail_fav);
+        progressBar = findViewById(R.id.progress_bar_detail_fav);
+
+        AddData();
+
         Realm.init(DetailFavActivity.this);
-        RealmConfiguration configuration = new RealmConfiguration.Builder().allowWritesOnUiThread(true).build();
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
 //        realm = Realm.getDefaultInstance();
         realmHelper = new RealmHelper(realm);
-
-        imageView = findViewById(R.id.image_view_detail);
-        textViewTitle = findViewById(R.id.text_title_detail);
-        textViewInfo = findViewById(R.id.text_info_detail);
-        textViewDesc = findViewById(R.id.text_desc_detail);
-        btnFavDetail = findViewById(R.id.btn_fav_detail);
-        progressBar = findViewById(R.id.progress_bar);
-
-        AddData();
 
         btnFavDetail.setOnClickListener(this);
     }
@@ -117,8 +118,8 @@ public class DetailFavActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         if (v == btnFavDetail) {
+            Toast.makeText(this, title + " Successfully deleted!", Toast.LENGTH_SHORT).show();
             realmHelper.delete(id);
-            Toast.makeText(this, "Delete Success", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
