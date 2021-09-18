@@ -17,28 +17,31 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.ptsganjil202111rpl2akhtarrasyad19.Model.RealmModel;
 import com.example.ptsganjil202111rpl2akhtarrasyad19.Realm.RealmHelper;
-import com.squareup.picasso.Picasso;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
 
-public class DetailRow extends AppCompatActivity implements View.OnClickListener {
+public class DetailFavActivity extends AppCompatActivity implements View.OnClickListener {
     String title, desc, genre, image, release, actors, director, country, rating, imageLand;
+    Integer id;
     ImageView imageView;
     TextView textViewTitle, textViewInfo, textViewDesc;
     ImageButton btnFavDetail;
     ProgressBar progressBar;
     Realm realm;
     RealmHelper realmHelper;
-    RealmModel realmModel;
-    Boolean key = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_row);
+        setContentView(R.layout.activity_detail_fav);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Realm.init(DetailFavActivity.this);
+        RealmConfiguration configuration = new RealmConfiguration.Builder().allowWritesOnUiThread(true).build();
+        realm = Realm.getInstance(configuration);
+//        realm = Realm.getDefaultInstance();
+        realmHelper = new RealmHelper(realm);
 
         imageView = findViewById(R.id.image_view_detail);
         textViewTitle = findViewById(R.id.text_title_detail);
@@ -49,16 +52,12 @@ public class DetailRow extends AppCompatActivity implements View.OnClickListener
 
         AddData();
 
-        Realm.init(DetailRow.this);
-        RealmConfiguration configuration = new RealmConfiguration.Builder().allowWritesOnUiThread(true).build();
-        realm = Realm.getInstance(configuration);
-//        realm = Realm.getDefaultInstance();
-
         btnFavDetail.setOnClickListener(this);
     }
 
     private void AddData() {
         Intent intent = getIntent();
+        id = Integer.parseInt(intent.getStringExtra("id"));
         title = intent.getStringExtra("title");
         desc = intent.getStringExtra("desc");
         genre = intent.getStringExtra("genre");
@@ -118,18 +117,9 @@ public class DetailRow extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v == btnFavDetail) {
-            realmHelper = new RealmHelper(realm);
-            if (!key) {
-                realmModel = new RealmModel(title, desc, genre, image, release, actors, director, country, rating, imageLand);
-                realmHelper.save(realmModel);
-                btnFavDetail.setImageResource(R.drawable.ic_favorite);
-                Toast.makeText(this, "Succesfully add to favorite!", Toast.LENGTH_SHORT).show();
-                key = true;
-            } else {
-//                id = realmModel.getId();
-//                realmHelper.delete(id);
-                Toast.makeText(this, "Was added to favorite!", Toast.LENGTH_SHORT).show();
-            }
+            realmHelper.delete(id);
+            Toast.makeText(this, "Delete Success", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }

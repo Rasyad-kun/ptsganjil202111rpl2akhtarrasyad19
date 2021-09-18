@@ -1,5 +1,6 @@
 package com.example.ptsganjil202111rpl2akhtarrasyad19.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,10 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.ptsganjil202111rpl2akhtarrasyad19.HomeActivity;
 import com.example.ptsganjil202111rpl2akhtarrasyad19.Model.LocalModel;
 import com.example.ptsganjil202111rpl2akhtarrasyad19.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -52,12 +51,14 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         return new LocalViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull LocalViewHolder holder, int position) {
-        holder.mTextViewTitle.setText(mLocalList.get(position).getmTitle());
-        holder.mTextviewGenre.setText("Genre : " + mLocalList.get(position).getmGenre());
+        final LocalModel model = mLocalList.get(position);
+        holder.mTextViewTitle.setText(model.getmTitle());
+        holder.mTextviewGenre.setText("Genre : " + model.getmGenre());
         Glide.with(mContext)
-                .load(mLocalList.get(position).getmImage())
+                .load(model.getmImage())
                 .fitCenter()
                 .centerCrop()
                 .placeholder(R.drawable.loader)

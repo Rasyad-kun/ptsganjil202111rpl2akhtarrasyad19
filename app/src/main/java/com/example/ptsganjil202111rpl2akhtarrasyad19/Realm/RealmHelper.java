@@ -30,6 +30,7 @@ public class RealmHelper {
                     }else {
                         nextId = currentIdNum.intValue() + 1;
                     }
+                    realmModel.setKey(true);
                     realmModel.setId(nextId);
                     RealmModel model = realm.copyToRealm(realmModel);
                 }else{
@@ -40,7 +41,7 @@ public class RealmHelper {
     }
 
     // untuk memanggil semua data
-    public List<RealmModel> getAllMahasiswa(){
+    public List<RealmModel> getAllRealm(){
         RealmResults<RealmModel> results = realm.where(RealmModel.class).findAll();
         return results;
     }

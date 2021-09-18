@@ -20,11 +20,11 @@
 
     <TextView
         android:id="@+id/tv_empty"
+        style="@style/TextAppearance.AppCompat.Display3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Empty"
         android:layout_centerInParent="true"
-        style="@style/TextAppearance.AppCompat.Display3"
-        android:visibility="invisible"/>
+        android:text="Empty"
+        android:visibility="invisible" />
 
 </RelativeLayout>

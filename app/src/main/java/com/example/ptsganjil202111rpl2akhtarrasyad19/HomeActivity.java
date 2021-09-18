@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,9 +30,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnItemClickListener {
-    private RecyclerView mRecyclerView;
-    private LocalAdapter mLocalAdapter;
-    private ArrayList<LocalModel> mLocalList;
+    private RecyclerView recyclerView;
+    private LocalAdapter localAdapter;
+    private ArrayList<LocalModel> localList;
     private ProgressBar progressBar;
     private TextView tv_empty;
 
@@ -43,9 +44,9 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
 
         progressBar = findViewById(R.id.progress_bar);
         tv_empty = findViewById(R.id.tv_empty);
-        mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this)); //*
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //*
 
         AddData();
     }
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            mLocalList = new ArrayList<>();
+                            localList = new ArrayList<>();
                             JSONArray jsonArray = response.getJSONArray("result");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -75,22 +76,13 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
                                 String country = detail.getString("country");
                                 String imageLand = detail.getString("thumbnailLandscape");
 
-                                mLocalList.add(new LocalModel(title, desc, genre, image, release, actors, director, country, rating, imageLand));
+                                localList.add(new LocalModel(title, desc, genre, image, release, actors, director, country, rating, imageLand));
                             }
+
+                            ShowData();
 
                         } catch (JSONException e) {
                             Log.d("error", e.toString());
-                        }
-
-                        mLocalAdapter = new LocalAdapter(HomeActivity.this, mLocalList); //*
-                        mRecyclerView.setAdapter(mLocalAdapter); //*
-                        mLocalAdapter.setOnItemClickListener(HomeActivity.this); //Detail Activity / Callback / OnItemClickListener
-
-                        progressBar.setVisibility(View.GONE);
-                        if (mLocalList.isEmpty()){
-                            tv_empty.setVisibility(View.VISIBLE);
-                        } else {
-                            tv_empty.setVisibility(View.INVISIBLE);
                         }
                     }
 
@@ -102,9 +94,31 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        progressBar.setVisibility(View.VISIBLE);
+        localAdapter.notifyDataSetChanged();
+        ShowData();
+    }
+
+    private void ShowData() {
+        localAdapter = new LocalAdapter(this, localList); //*
+        recyclerView.setAdapter(localAdapter); //*
+        localAdapter.setOnItemClickListener(HomeActivity.this); //Detail Activity / Callback / OnItemClickListener
+
+        if (localList.isEmpty()){
+            tv_empty.setVisibility(View.VISIBLE);
+        } else {
+            tv_empty.setVisibility(View.INVISIBLE);
+        }
+
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public void onItemClick(int position) {
         Intent detailIntent = new Intent(this, DetailRow.class);
-        LocalModel clickedRow = mLocalList.get(position);
+        LocalModel clickedRow = localList.get(position);
 
         detailIntent.putExtra("title", clickedRow.getmTitle());
         detailIntent.putExtra("desc", clickedRow.getmDesc());
@@ -120,6 +134,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
         startActivity(detailIntent);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -128,10 +143,11 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
                 Toast.makeText(this, "On refresh now!", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_home:
-                Toast.makeText(this, "Back to homepage!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "In homepage now!", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_favorite:
-                Toast.makeText(this, "Opening Favorite session now!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, FavActivity.class));
+                Toast.makeText(this, "Opening favorite list now!", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -142,13 +158,5 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.locale_menu, menu);
         return true;
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        mLocalAdapter.notifyDataSetChanged();
-        AddData();
     }
 }

@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        ImageView splash_background=findViewById(R.id.splash_background);
+        ImageView splash_background = findViewById(R.id.splash_background);
         Glide.with(this).load(R.drawable.background_splash).fitCenter().centerCrop().into(splash_background);
 
         new Handler().postDelayed(new Runnable() {
@@ -28,6 +27,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 finish();
             }
-        },3000);
+        }, 3000);
     }
 }
