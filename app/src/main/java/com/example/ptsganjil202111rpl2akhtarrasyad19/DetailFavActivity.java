@@ -5,28 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
-import com.example.ptsganjil202111rpl2akhtarrasyad19.Model.RealmModel;
 import com.example.ptsganjil202111rpl2akhtarrasyad19.Realm.RealmHelper;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class DetailFavActivity extends AppCompatActivity implements View.OnClickListener {
-    String title, desc, genre, image, release, actors, director, country, rating, imageLand;
+    String title, desc, genre, image, release, actors, director, country, rating, imageLand, trailer;
     Integer id;
-    ImageView imageView;
-    TextView textViewTitle, textViewInfo, textViewDesc;
+    ImageView imageView, imageViewLand;
+    TextView textViewTitle, textViewTitle2, textViewGenre, textViewDirector, textViewActors, textViewCountry, textViewRelease, textViewRating, textViewDesc;
+    VideoView videoViewTrailer;
     ImageButton btnFavDetail;
     ProgressBar progressBar;
     Realm realm;
@@ -39,9 +41,17 @@ public class DetailFavActivity extends AppCompatActivity implements View.OnClick
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imageView = findViewById(R.id.image_view_detail_fav);
+        imageViewLand = findViewById(R.id.imageLand_view_detail_fav);
         textViewTitle = findViewById(R.id.text_title_detail_fav);
-        textViewInfo = findViewById(R.id.text_info_detail_fav);
+        textViewTitle2 = findViewById(R.id.text_title_detail2_fav);
+        textViewGenre = findViewById(R.id.text_genre_detail_fav);
+        textViewDirector = findViewById(R.id.text_director_detail_fav);
+        textViewActors = findViewById(R.id.text_actors_detail_fav);
+        textViewCountry = findViewById(R.id.text_country_detail_fav);
+        textViewRelease = findViewById(R.id.text_release_detail_fav);
+        textViewRating = findViewById(R.id.text_rating_detail_fav);
         textViewDesc = findViewById(R.id.text_desc_detail_fav);
+        videoViewTrailer = findViewById(R.id.video_view_detail_fav);
         btnFavDetail = findViewById(R.id.btn_fav_detail_fav);
         progressBar = findViewById(R.id.progress_bar_detail_fav);
 
@@ -69,6 +79,7 @@ public class DetailFavActivity extends AppCompatActivity implements View.OnClick
         country = intent.getStringExtra("country");
         rating = intent.getStringExtra("rating");
         imageLand = intent.getStringExtra("imageLand");
+//        trailer = intent.getStringExtra("trailer");
 
         HolderData();
     }
@@ -79,27 +90,40 @@ public class DetailFavActivity extends AppCompatActivity implements View.OnClick
             Glide.with(this)
                     .load(image)
                     .fitCenter()
-                    .centerInside()
+                    .centerCrop()
                     .placeholder(R.drawable.loader)
-                    .error(R.mipmap.ic_launcher_round)
-                    .into(imageView);
+                    .error(image)
+                    .into(imageViewLand);
         } else {
             Glide.with(this)
                     .load(imageLand)
                     .fitCenter()
-                    .centerInside()
+                    .optionalCenterCrop()
                     .placeholder(R.drawable.loader)
-                    .error(R.mipmap.ic_launcher_round)
-                    .into(imageView);
+                    .error(image)
+                    .into(imageViewLand);
         }
+        Glide.with(this)
+                .load(image)
+                .fitCenter()
+                .centerCrop()
+                .placeholder(R.drawable.loader)
+                .error(image)
+                .into(imageView);
         textViewTitle.setText(title);
-        textViewInfo.setText("Genre : " + genre +
-                "\nDirector : " + director +
-                "\nActors : " + actors +
-                "\nCountry : " + country +
-                "\nRelease : " + release +
-                "\nRating : " + rating);
+        textViewGenre.setText("Genre : " + genre);
+        textViewDirector.setText("Director : " + director);
+        textViewActors.setText("Actors : " + actors);
+        textViewCountry.setText("Country : " + country);
+        textViewRelease.setText("Release : " + release);
+        textViewRating.setText("Rating : " + rating);
+        textViewTitle2.setText(title);
         textViewDesc.setText("Synopsis : " + desc);
+
+//        MediaController mediaController = new MediaController(this);
+//        mediaController.setAnchorView(videoViewTrailer);
+//        videoViewTrailer.setMediaController(mediaController);
+//        videoViewTrailer.setVideoURI(Uri.parse(trailer));
 
         setTitle(title);
         progressBar.setVisibility(View.GONE);

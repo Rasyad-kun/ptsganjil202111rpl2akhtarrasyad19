@@ -20,23 +20,115 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_height="300dp">
 
                 <ImageView
-                    android:id="@+id/image_view_detail_fav"
+                    android:id="@+id/imageLand_view_detail_fav"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@mipmap/ic_launcher" />
 
-                <ImageButton
-                    android:id="@+id/btn_fav_detail_fav"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom|right"
-                    android:layout_margin="10dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_favorite" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_img" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/image_view_detail_fav"
+                            android:layout_width="130dp"
+                            android:layout_height="180dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <ImageButton
+                            android:id="@+id/btn_fav_detail_fav"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom|right"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_favorite" />
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/text_title_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:text="Title"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/text_genre_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Genre"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/text_director_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Director"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/text_actors_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Actors"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/text_country_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Country"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/text_release_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Release"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/text_rating_detail_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rating"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </FrameLayout>
 
@@ -47,33 +139,45 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/text_title_detail_fav"
+                    android:id="@+id/text_title_detail2_fav"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
                     android:text="Title"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textColor="@color/black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_info_detail_fav"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="@color/purple_500"
-                    android:padding="15dp"
-                    android:text="desc"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                    android:textColor="@android:color/white" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/text_info_detail"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_margin="10dp"-->
+                <!--                    android:background="@drawable/gradient_background"-->
+                <!--                    android:padding="15dp"-->
+                <!--                    android:text="desc"-->
+                <!--                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"-->
+                <!--                    android:textColor="@android:color/white" />-->
 
                 <TextView
                     android:id="@+id/text_desc_detail_fav"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="6dp"
+                    android:background="@drawable/gradient_background"
+                    android:padding="10dp"
                     android:text="desc"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/widget_edittext_dark" />
+                    android:textColor="@color/white" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <VideoView
+                        android:id="@+id/video_view_detail_fav"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
 
             </LinearLayout>
 

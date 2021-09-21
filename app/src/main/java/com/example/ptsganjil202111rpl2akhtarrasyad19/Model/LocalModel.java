@@ -14,6 +14,7 @@ public class LocalModel {
         this.mCountry = mCountry;
         this.mRating = mRating;
         this.mImageLand = mImageLand;
+//        this.mTrailer = mTrailer;
     }
 
     public String getmTitle() {

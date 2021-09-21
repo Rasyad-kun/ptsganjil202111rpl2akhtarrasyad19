@@ -24,6 +24,7 @@ public class RealmModel extends RealmObject {
         this.mCountry = mCountry;
         this.mRating = mRating;
         this.mImageLand = mImageLand;
+//        this.mTrailer = mTrailer;
     }
 
     public Boolean getKey() {

@@ -29,7 +29,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHolder> {
-    private List<RealmModel> mRealmModelsList;
+    private final List<RealmModel> mRealmModelsList;
     Context mContext;
 
     public RealmAdapter(Context context, List<RealmModel> realmModels) {
@@ -48,7 +48,9 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHol
     public void onBindViewHolder(RealmAdapter.RealmViewHolder holder, int position) {
         final RealmModel model = mRealmModelsList.get(position);
         holder.mTextViewTitle.setText(model.getmTitle());
-        holder.mTextviewGenre.setText("Genre: " + model.getmGenre());
+        holder.mTextviewGenre.setText("Genre : " + model.getmGenre());
+        holder.mTextviewRating.setText("Rating : " + model.getmRating());
+        holder.mTextviewRelease.setText("Release : " + model.getmRelease());
         Glide.with(mContext)
                 .load(model.getmImage())
                 .fitCenter()
@@ -71,6 +73,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHol
                 intent.putExtra("country", model.getmCountry());
                 intent.putExtra("rating", model.getmRating());
                 intent.putExtra("imageLand", model.getmImageLand());
+//                intent.putExtra("trailer", model.getmTrailer());
                 v.getContext().startActivity(intent);
             }
         });
@@ -82,13 +85,15 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.RealmViewHol
     }
 
     public class RealmViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
-        public TextView mTextViewTitle, mTextviewGenre;
+        public TextView mTextViewTitle, mTextviewGenre, mTextviewRating, mTextviewRelease;
         public ImageView mImageView;
 
         public RealmViewHolder(View itemView) {
             super(itemView);
             mTextViewTitle = itemView.findViewById(R.id.text_title_fav_item);
             mTextviewGenre = itemView.findViewById(R.id.text_genre_fav_item);
+            mTextviewRating = itemView.findViewById(R.id.text_rating_fav_item);
+            mTextviewRelease = itemView.findViewById(R.id.text_release_fav_item);
             mImageView = itemView.findViewById(R.id.image_view_fav_item);
 
             Realm.init(mContext);

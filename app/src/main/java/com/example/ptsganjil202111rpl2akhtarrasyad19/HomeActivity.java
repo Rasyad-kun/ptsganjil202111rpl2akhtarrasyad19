@@ -75,6 +75,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
                                 String director = detail.getString("director");
                                 String country = detail.getString("country");
                                 String imageLand = detail.getString("thumbnailLandscape");
+//                                String trailer = detail.getString("trailer");
 
                                 localList.add(new LocalModel(title, desc, genre, image, release, actors, director, country, rating, imageLand));
                             }
@@ -130,6 +131,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
         detailIntent.putExtra("country", clickedRow.getmCountry());
         detailIntent.putExtra("rating", clickedRow.getmRating());
         detailIntent.putExtra("imageLand", clickedRow.getmImageLand());
+//        detailIntent.putExtra("trailer", clickedRow.getmTrailer());
 
         startActivity(detailIntent);
     }
@@ -148,6 +150,7 @@ public class HomeActivity extends AppCompatActivity implements LocalAdapter.OnIt
             case R.id.menu_favorite:
                 startActivity(new Intent(HomeActivity.this, FavActivity.class));
                 Toast.makeText(this, "Moving to the favorite list now!", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
